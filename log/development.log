@@ -15105,3 +15105,746 @@ Served asset /ads/ad1.png - 304 Not Modified (0ms)
 
 Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 00:06:15 +0800
 Served asset /ads/ad1.png - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-26 09:46:19 +0800
+Processing by HomeController#index as HTML
+Mysql2::Error: Table 'fandian_development.cities' doesn't exist: SHOW FULL FIELDS FROM `cities`
+Completed 500 Internal Server Error in 41ms
+
+ActiveRecord::StatementInvalid (Mysql2::Error: Table 'fandian_development.cities' doesn't exist: SHOW FULL FIELDS FROM `cities`):
+  app/controllers/home_controller.rb:3:in `index'
+
+
+  Rendered /Users/lion/.rvm/gems/ruby-1.9.3-p484/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /Users/lion/.rvm/gems/ruby-1.9.3-p484/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+  Rendered /Users/lion/.rvm/gems/ruby-1.9.3-p484/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.8ms)
+Connecting to database specified by database.yml
+  [1m[36m (8.5ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (9.6ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (3.3ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateAreas (20131224161944)
+  [1m[35m (6.6ms)[0m  CREATE TABLE `areas` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) NOT NULL, `city_id` int(11) NOT NULL, `enable` tinyint(1) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224161944')[0m
+Migrating to CreateShops (20131224162409)
+  [1m[35m (6.5ms)[0m  CREATE TABLE `shops` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) NOT NULL, `star` float, `logo_path` varchar(255), `enable` tinyint(1) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224162409')[0m
+Migrating to CreateCities (20131224162624)
+  [1m[35m (5.8ms)[0m  CREATE TABLE `cities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) NOT NULL, `class_name` varchar(255) NOT NULL, `enable` tinyint(1) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224162624')[0m
+Migrating to CreateShopHours (20131224162857)
+  [1m[35m (6.4ms)[0m  CREATE TABLE `shop_hours` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `shop_id` int(11) NOT NULL, `start_time` varchar(255) NOT NULL, `end_time` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224162857')[0m
+Migrating to CreateAreasShops (20131224162942)
+  [1m[35m (6.3ms)[0m  CREATE TABLE `areas_shops` (`area_id` int(11), `shop_id` int(11)) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224162942')[0m
+Migrating to CreatePrimaryBusinesses (20131224163239)
+  [1m[35m (6.1ms)[0m  CREATE TABLE `primary_businesses` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `enable` tinyint(1), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224163239')[0m
+Migrating to CreatePrimaryBusinessesShops (20131224163509)
+  [1m[35m (5.9ms)[0m  CREATE TABLE `primary_businesses_shops` (`primary_business_id` int(11), `shop_id` int(11)) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224163509')[0m
+Migrating to AddCommondNumToShops (20131224163816)
+  [1m[35m (10.2ms)[0m  ALTER TABLE `shops` ADD `order_commond_num` int(11) DEFAULT 0
+  [1m[36m (9.4ms)[0m  [1mALTER TABLE `shops` ADD `supplier_remark` text[0m
+  [1m[35m (9.5ms)[0m  ALTER TABLE `shops` ADD `send_food_price` int(11) DEFAULT 0
+  [1m[36m (10.2ms)[0m  [1mALTER TABLE `shops` ADD `location` varchar(255)[0m
+  [1m[35m (10.9ms)[0m  ALTER TABLE `shops` ADD `send_food_rate` varchar(255)
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224163816')[0m
+Migrating to CreateFoodTypes (20131224164058)
+  [1m[35m (6.9ms)[0m  CREATE TABLE `food_types` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) NOT NULL, `shop_id` int(11) NOT NULL, `enable` tinyint(1) NOT NULL, `sort_id` int(11) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224164058')[0m
+Migrating to CreateFoods (20131224164600)
+  [1m[35m (6.4ms)[0m  CREATE TABLE `foods` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `food_type_id` int(11) NOT NULL, `name` varchar(255) NOT NULL, `enable` tinyint(1) NOT NULL, `sort_id` int(11) NOT NULL, `description` varchar(255), `price` float NOT NULL, `food_state` int(11) NOT NULL, `food_unit` varchar(255) NOT NULL, `activity_state` int(11) NOT NULL, `is_new` tinyint(1), `is_sign` tinyint(1), `is_hot` tinyint(1), `original_price` float NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224164600')[0m
+Migrating to CreateUsers (20131224164844)
+  [1m[35m (6.2ms)[0m  CREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `mail` varchar(255) NOT NULL, `password` varchar(255) NOT NULL, `nickname` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224164844')[0m
+Migrating to CreateOrders (20131224164949)
+  [1m[35m (6.5ms)[0m  CREATE TABLE `orders` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `order_num` varchar(255) NOT NULL, `original_price` float NOT NULL, `current_price` float NOT NULL, `phone` varchar(255) NOT NULL, `address` varchar(255) NOT NULL, `state` varchar(255) NOT NULL, `user_id` int(11) NOT NULL, `area_id` int(11) NOT NULL, `shop_id` int(11) NOT NULL, `altphone` varchar(255), `notes` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224164949')[0m
+Migrating to CreateOrderDetails (20131224165251)
+  [1m[35m (5.3ms)[0m  CREATE TABLE `order_details` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `order_id` int(11) NOT NULL, `food_id` int(11) NOT NULL, `name` varchar(255) NOT NULL, `number` int(11) NOT NULL, `price` float NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224165251')[0m
+Migrating to CreateOrderLogs (20131224165410)
+  [1m[35m (5.4ms)[0m  CREATE TABLE `order_logs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `order_id` int(11) NOT NULL, `content` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224165410')[0m
+Migrating to CreateUserContacts (20131224165518)
+  [1m[35m (5.7ms)[0m  CREATE TABLE `user_contacts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` integer NOT NULL, `addr` varchar(255) NOT NULL, `phone` varchar(255) NOT NULL, `altphone` varchar(255), `is_default` tinyint(1) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224165518')[0m
+Migrating to CreateNumberManages (20131224165652)
+  [1m[35m (6.4ms)[0m  CREATE TABLE `number_manages` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `order_type` varchar(255) NOT NULL, `number` int(11) NOT NULL, `lock_version` int(11) DEFAULT 0 NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20131224165652')[0m
+  [1m[35m (0.2ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-26 09:46:35 +0800
+Processing by HomeController#index as HTML
+  [1m[36mCity Load (0.2ms)[0m  [1mSELECT `cities`.* FROM `cities` [0m
+Compiled nav.css  (0ms)  (pid 11870)
+Compiled common.css  (0ms)  (pid 11870)
+Compiled jquery-1.7.1.min.js  (3ms)  (pid 11870)
+Compiled jquery.cookie.js  (0ms)  (pid 11870)
+Compiled home/iDeal.visitRecord.js  (0ms)  (pid 11870)
+Compiled home/nav.js  (0ms)  (pid 11870)
+  Rendered home/index.html.erb (134.4ms)
+Completed 200 OK in 146ms (Views: 136.2ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/assets/nav.css?body=1" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /nav.css - 200 OK (3ms)
+
+
+Started GET "/assets/common.css?body=1" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /common.css - 200 OK (3ms)
+
+
+Started GET "/assets/jquery-1.7.1.min.js?body=1" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /jquery-1.7.1.min.js - 200 OK (2ms)
+
+
+Started GET "/assets/jquery.cookie.js?body=1" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /jquery.cookie.js - 200 OK (2ms)
+
+
+Started GET "/assets/home/nav.js?body=1" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /home/nav.js - 200 OK (2ms)
+
+
+Started GET "/assets/home/iDeal.visitRecord.js?body=1" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /home/iDeal.visitRecord.js - 200 OK (2ms)
+
+
+Started GET "/assets/newnavi/logo.png" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /newnavi/logo.png - 200 OK (12ms)
+
+
+Started GET "/assets/newnavi/title.png" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /newnavi/title.png - 200 OK (9ms)
+
+
+Started GET "/assets/newnavi/dot.png" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /newnavi/dot.png - 200 OK (11ms)
+
+
+Started GET "/assets/newnavi/choose.png" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /newnavi/choose.png - 200 OK (6ms)
+
+
+Started GET "/assets/newnavi/bg.png" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /newnavi/bg.png - 200 OK (7ms)
+
+
+Started GET "/assets/favicon.ico" for 127.0.0.1 at 2013-12-26 09:46:36 +0800
+Served asset /favicon.ico - 200 OK (3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Processing by HomeController#index as HTML
+  [1m[35mCity Load (0.3ms)[0m  SELECT `cities`.* FROM `cities` 
+  [1m[36mArea Load (0.2ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 1[0m
+  [1m[35mArea Load (0.3ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 2
+  [1m[36mArea Load (0.2ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 3[0m
+  [1m[35mArea Load (0.2ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 4
+  [1m[36mArea Load (0.2ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 5[0m
+  [1m[35mArea Load (0.1ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 6
+  [1m[36mArea Load (0.1ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 7[0m
+  Rendered home/index.html.erb (50.9ms)
+Completed 200 OK in 83ms (Views: 49.0ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/assets/home/iDeal.visitRecord.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /home/iDeal.visitRecord.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-1.7.1.min.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /jquery-1.7.1.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/nav.css?body=1" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /nav.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.cookie.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /jquery.cookie.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/common.css?body=1" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/home/nav.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /home/nav.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/logo.png" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /newnavi/logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/title.png" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /newnavi/title.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/dot.png" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /newnavi/dot.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/choose.png" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /newnavi/choose.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/bg.png" for 127.0.0.1 at 2013-12-26 09:58:52 +0800
+Served asset /newnavi/bg.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/back.png" for 127.0.0.1 at 2013-12-26 09:58:54 +0800
+Served asset /newnavi/back.png - 200 OK (27ms)
+
+
+Started GET "/assets/newnavi/background.png" for 127.0.0.1 at 2013-12-26 09:58:54 +0800
+Served asset /newnavi/background.png - 200 OK (4ms)
+
+
+Started GET "/areas/1" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Processing by AreasController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mArea Load (0.4ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`id` = 1 LIMIT 1
+Compiled areas/search.js  (0ms)  (pid 11870)
+Compiled areas/top_js.js  (0ms)  (pid 11870)
+Compiled areas/set_cookie.js  (0ms)  (pid 11870)
+  [1m[36mShop Load (0.9ms)[0m  [1mSELECT `shops`.* FROM `shops` INNER JOIN `areas_shops` ON `shops`.`id` = `areas_shops`.`shop_id` WHERE `areas_shops`.`area_id` = 1[0m
+  [1m[35mShopHour Load (0.3ms)[0m  SELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 1
+  [1m[36mShopHour Load (0.3ms)[0m  [1mSELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 2[0m
+  [1m[35mShopHour Load (0.2ms)[0m  SELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 3
+Compiled jquery.XYTipsWindow.2.8.js  (0ms)  (pid 11870)
+Compiled areas/common.js  (20ms)  (pid 11870)
+  Rendered areas/show.html.erb within layouts/areas (265.0ms)
+Completed 200 OK in 312ms (Views: 295.6ms | ActiveRecord: 9.9ms)
+
+
+Started GET "/assets/common.css?v4.1.7.css" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /common.css - 200 OK (0ms)
+
+
+Started GET "/assets/base.css?v4.1.7.css" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Compiled base.css  (0ms)  (pid 11870)
+Served asset /base.css - 200 OK (10ms)
+
+
+Started GET "/assets/main.css?v4.1.7.css" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Compiled main.css  (0ms)  (pid 11870)
+Served asset /main.css - 200 OK (9ms)
+
+
+Started GET "/assets/areas/top_js.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /areas/top_js.js - 200 OK (2ms)
+
+
+Started GET "/assets/recommendSup.css?v4.1.7.css" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Compiled recommendSup.css  (0ms)  (pid 11870)
+Served asset /recommendSup.css - 200 OK (40ms)
+
+
+Started GET "/assets/areas/search.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /areas/search.js - 200 OK (1ms)
+
+
+Started GET "/assets/areas/set_cookie.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /areas/set_cookie.js - 200 OK (1ms)
+
+
+Started GET "/assets/areas/recommendSup.js?v4.1.7.js" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Compiled areas/recommendSup.js  (1ms)  (pid 11870)
+Served asset /areas/recommendSup.js - 200 OK (7ms)
+
+
+Started GET "/assets/jquery.XYTipsWindow.2.8.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /jquery.XYTipsWindow.2.8.js - 200 OK (1ms)
+
+
+Started GET "/assets/areas/common.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /areas/common.js - 200 OK (1ms)
+
+
+Started GET "/assets/lazyload.js?v4.1.7.js" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Compiled lazyload.js  (0ms)  (pid 11870)
+Served asset /lazyload.js - 200 OK (7ms)
+
+
+Started GET "/assets/jquery-1.7.1.min.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /jquery-1.7.1.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.cookie.js?body=1" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /jquery.cookie.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tranlogo.png" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /tranlogo.png - 200 OK (17ms)
+
+
+Started GET "/assets/ads/ad2.png" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /ads/ad2.png - 200 OK (7ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /ads/ad1.png - 200 OK (6ms)
+
+
+Started GET "/assets/shops/2_logo.jpeg" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /shops/2_logo.jpeg - 200 OK (5ms)
+
+
+Started GET "/assets/ads/ad3.png" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /ads/ad3.png - 200 OK (6ms)
+
+
+Started GET "/assets/shops/1_logo.jpeg" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /shops/1_logo.jpeg - 200 OK (5ms)
+
+
+Started GET "/assets/shops/3_logo.jpeg" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /shops/3_logo.jpeg - 200 OK (33ms)
+
+
+Started GET "/assets/areas/default.js?v4.1.7.js" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Compiled areas/default.js  (0ms)  (pid 11870)
+Served asset /areas/default.js - 200 OK (10ms)
+
+
+Started GET "/assets/areas/getfoodbyrandom.js?v4.1.7.js" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Compiled areas/getfoodbyrandom.js  (0ms)  (pid 11870)
+Served asset /areas/getfoodbyrandom.js - 200 OK (20ms)
+
+
+Started GET "/assets/home/iDeal.visitRecord.js?webId=2&channel=1&pageType=1" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /home/iDeal.visitRecord.js - 200 OK (0ms)
+
+
+Started GET "/assets/loading.gif" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /loading.gif - 200 OK (5ms)
+
+
+Started GET "/assets/newTopbg.png" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /newTopbg.png - 200 OK (5ms)
+
+
+Started GET "/assets/notification.png" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /notification.png - 200 OK (4ms)
+
+
+Started GET "/assets/notiNum2.png" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /notiNum2.png - 200 OK (5ms)
+
+
+Started GET "/assets/base/fdnew.png" for 127.0.0.1 at 2013-12-26 09:58:55 +0800
+Served asset /base/fdnew.png - 200 OK (10ms)
+
+
+Started GET "/assets/base/pos.png" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Served asset /base/pos.png - 200 OK (13ms)
+
+
+Started GET "/assets/base/closed-bg.png" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Served asset /base/closed-bg.png - 200 OK (7ms)
+
+
+Started GET "/assets/base/step-point-on.gif" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Served asset /base/step-point-on.gif - 200 OK (7ms)
+
+
+Started GET "/assets/main.png" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Served asset /main.png - 200 OK (7ms)
+
+
+Started GET "/assets/rec.png" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Served asset /rec.png - 200 OK (38ms)
+
+
+Started GET "/assets/base/lap.gif" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Served asset /base/lap.gif - 200 OK (6ms)
+
+
+Started GET "/assets/base/top_layer_arrow.png" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Served asset /base/top_layer_arrow.png - 200 OK (7ms)
+
+
+Started GET "/assets/base/myAccountButton.png" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Served asset /base/myAccountButton.png - 200 OK (6ms)
+
+
+Started GET "/shops/get_detail?shopID=3&_=1388023136769" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Processing by ShopsController#get_detail as JSON
+  Parameters: {"shopID"=>"3", "_"=>"1388023136769"}
+  [1m[36mShop Load (0.3ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 3 LIMIT 1[0m
+  [1m[35mShopHour Load (0.2ms)[0m  SELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 3
+  [1m[36mPrimaryBusiness Load (0.2ms)[0m  [1mSELECT `primary_businesses`.* FROM `primary_businesses` INNER JOIN `primary_businesses_shops` ON `primary_businesses`.`id` = `primary_businesses_shops`.`primary_business_id` WHERE `primary_businesses_shops`.`shop_id` = 3[0m
+Completed 200 OK in 21ms (Views: 0.1ms | ActiveRecord: 6.4ms)
+
+
+Started GET "/assets/base/arrow-shopTip.png" for 127.0.0.1 at 2013-12-26 09:58:56 +0800
+Served asset /base/arrow-shopTip.png - 200 OK (4ms)
+
+
+Started GET "/shops/get_detail?shopID=2&_=1388023137579" for 127.0.0.1 at 2013-12-26 09:58:57 +0800
+Processing by ShopsController#get_detail as JSON
+  Parameters: {"shopID"=>"2", "_"=>"1388023137579"}
+  [1m[35mShop Load (0.3ms)[0m  SELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 2 LIMIT 1
+  [1m[36mShopHour Load (0.2ms)[0m  [1mSELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 2[0m
+  [1m[35mPrimaryBusiness Load (0.4ms)[0m  SELECT `primary_businesses`.* FROM `primary_businesses` INNER JOIN `primary_businesses_shops` ON `primary_businesses`.`id` = `primary_businesses_shops`.`primary_business_id` WHERE `primary_businesses_shops`.`shop_id` = 2
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/shops/get_detail?shopID=1&_=1388023152406" for 127.0.0.1 at 2013-12-26 09:59:12 +0800
+Processing by ShopsController#get_detail as JSON
+  Parameters: {"shopID"=>"1", "_"=>"1388023152406"}
+  [1m[36mShop Load (0.3ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1[0m
+  [1m[35mShopHour Load (0.2ms)[0m  SELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 1
+  [1m[36mPrimaryBusiness Load (0.4ms)[0m  [1mSELECT `primary_businesses`.* FROM `primary_businesses` INNER JOIN `primary_businesses_shops` ON `primary_businesses`.`id` = `primary_businesses_shops`.`primary_business_id` WHERE `primary_businesses_shops`.`shop_id` = 1[0m
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/shop/1" for 127.0.0.1 at 2013-12-26 09:59:12 +0800
+Processing by ShopsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mShop Load (0.4ms)[0m  SELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1
+  [1m[36mFoodType Load (0.3ms)[0m  [1mSELECT `food_types`.* FROM `food_types` WHERE (shop_id = 1 and enable = 1)[0m
+Compiled shops/show.js  (0ms)  (pid 11870)
+Compiled json.js  (0ms)  (pid 11870)
+  [1m[35mShopHour Load (0.3ms)[0m  SELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 1
+  [1m[36mFood Load (0.6ms)[0m  [1mSELECT `foods`.* FROM `foods` WHERE (food_type_id = 1 and enable = 1)[0m
+  [1m[35mFoodType Load (0.3ms)[0m  SELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 1 LIMIT 1
+  [1m[36mCACHE (22.1ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1[0m
+  [1m[35mFood Load (0.4ms)[0m  SELECT `foods`.* FROM `foods` WHERE (food_type_id = 2 and enable = 1)
+  [1m[36mFoodType Load (0.4ms)[0m  [1mSELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 2 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1
+  [1m[36mFood Load (0.4ms)[0m  [1mSELECT `foods`.* FROM `foods` WHERE (food_type_id = 3 and enable = 1)[0m
+  [1m[35mFoodType Load (0.2ms)[0m  SELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 3 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 3 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 3 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `food_types`.* FROM `food_types` WHERE `food_types`.`id` = 3 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1[0m
+  [1m[35mFood Load (0.5ms)[0m  SELECT `foods`.* FROM `foods` WHERE (food_type_id = 4 and enable = 1)
+  Rendered shops/show.html.erb within layouts/shops (170.7ms)
+Completed 200 OK in 235ms (Views: 177.2ms | ActiveRecord: 29.8ms)
+
+
+Started GET "/assets/login.css?v4.1.7.css" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Compiled login.css  (0ms)  (pid 11870)
+Served asset /login.css - 200 OK (15ms)
+
+
+Started GET "/assets/json.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /json.js - 200 OK (3ms)
+
+
+Started GET "/assets/food.js?v4.1.7.js" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Compiled food.js  (0ms)  (pid 11870)
+Served asset /food.js - 200 OK (11ms)
+
+
+Started GET "/assets/SupCarInfo.js?v4.1.7.js" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Compiled SupCarInfo.js  (0ms)  (pid 11870)
+Served asset /SupCarInfo.js - 200 OK (7ms)
+
+
+Started GET "/assets/shops/show.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /shops/show.js - 200 OK (1ms)
+
+
+Started GET "/assets/jquery-1.7.1.min.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /jquery-1.7.1.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.cookie.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /jquery.cookie.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/operate_cart.js?v4.1.7.js" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Compiled operate_cart.js  (0ms)  (pid 11870)
+Served asset /operate_cart.js - 200 OK (9ms)
+
+
+Started GET "/assets/foodType_new.png" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /foodType_new.png - 200 OK (6ms)
+
+
+Started GET "/assets/foodType_sign.png" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /foodType_sign.png - 200 OK (46ms)
+
+
+Started GET "/assets/base/web_sb.png" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /base/web_sb.png - 200 OK (11ms)
+
+
+Started GET "/assets/base/s_tab.gif" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /base/s_tab.gif - 200 OK (6ms)
+
+
+Started GET "/assets/base/order-btn.png" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /base/order-btn.png - 200 OK (10ms)
+
+
+Started GET "/assets/base/top.png" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /base/top.png - 200 OK (11ms)
+
+
+Started GET "/assets/noSend_t.png" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /noSend_t.png - 200 OK (7ms)
+
+
+Started POST "/areas/check_shop" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Processing by AreasController#check_shop as */*
+  Parameters: {"supID"=>"1", "areaID"=>"1"}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mShop Load (0.4ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 1 LIMIT 1[0m
+  [1m[35mArea Load (0.3ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`id` = 1 LIMIT 1
+  [1m[36mShop Exists (0.4ms)[0m  [1mSELECT 1 AS one FROM `shops` INNER JOIN `areas_shops` ON `shops`.`id` = `areas_shops`.`shop_id` WHERE `areas_shops`.`area_id` = 1 AND `shops`.`id` = 1 LIMIT 1[0m
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/base/layer-bg.png" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /base/layer-bg.png - 200 OK (3ms)
+
+
+Started GET "/assets/no_food.png" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+Served asset /no_food.png - 200 OK (4ms)
+
+
+Started GET "/images/favicon.ico" for 127.0.0.1 at 2013-12-26 09:59:13 +0800
+
+ActionController::RoutingError (No route matches [GET] "/images/favicon.ico"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /Users/lion/.rvm/rubies/ruby-1.9.3-p484/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /Users/lion/.rvm/rubies/ruby-1.9.3-p484/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /Users/lion/.rvm/rubies/ruby-1.9.3-p484/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /Users/lion/.rvm/gems/ruby-1.9.3-p484/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Processing by HomeController#index as HTML
+  [1m[35mCity Load (0.3ms)[0m  SELECT `cities`.* FROM `cities` 
+  [1m[36mArea Load (0.3ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 1[0m
+  [1m[35mArea Load (0.2ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 2
+  [1m[36mArea Load (0.2ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 3[0m
+  [1m[35mArea Load (0.2ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 4
+  [1m[36mArea Load (0.2ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 5[0m
+  [1m[35mArea Load (0.3ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 6
+  [1m[36mArea Load (0.3ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 7[0m
+  Rendered home/index.html.erb (9.0ms)
+Completed 200 OK in 12ms (Views: 8.7ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/nav.css?body=1" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Served asset /nav.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/common.css?body=1" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Served asset /common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/home/iDeal.visitRecord.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Served asset /home/iDeal.visitRecord.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-1.7.1.min.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Served asset /jquery-1.7.1.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.cookie.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Served asset /jquery.cookie.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/home/nav.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Served asset /home/nav.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/logo.png" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Served asset /newnavi/logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/title.png" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Served asset /newnavi/title.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/dot.png" for 127.0.0.1 at 2013-12-26 09:59:25 +0800
+Served asset /newnavi/dot.png - 304 Not Modified (0ms)
+
+
+Started GET "/areas/4" for 127.0.0.1 at 2013-12-26 09:59:28 +0800
+Processing by AreasController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mArea Load (0.4ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`id` = 4 LIMIT 1
+  [1m[36mShop Load (0.4ms)[0m  [1mSELECT `shops`.* FROM `shops` INNER JOIN `areas_shops` ON `shops`.`id` = `areas_shops`.`shop_id` WHERE `areas_shops`.`area_id` = 4[0m
+  Rendered areas/show.html.erb within layouts/areas (77.0ms)
+Completed 200 OK in 124ms (Views: 121.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/jquery-1.7.1.min.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:28 +0800
+Served asset /jquery-1.7.1.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.cookie.js?body=1" for 127.0.0.1 at 2013-12-26 09:59:28 +0800
+Served asset /jquery.cookie.js - 304 Not Modified (0ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Processing by HomeController#index as HTML
+  [1m[35mCity Load (0.3ms)[0m  SELECT `cities`.* FROM `cities` 
+  [1m[36mArea Load (0.3ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 1[0m
+  [1m[35mArea Load (0.2ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 2
+  [1m[36mArea Load (0.2ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 3[0m
+  [1m[35mArea Load (0.2ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 4
+  [1m[36mArea Load (0.2ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 5[0m
+  [1m[35mArea Load (0.3ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 6
+  [1m[36mArea Load (0.2ms)[0m  [1mSELECT `areas`.* FROM `areas` WHERE `areas`.`city_id` = 7[0m
+  Rendered home/index.html.erb (9.5ms)
+Completed 200 OK in 13ms (Views: 9.2ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/assets/nav.css?body=1" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Served asset /nav.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/common.css?body=1" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Served asset /common.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.cookie.js?body=1" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Served asset /jquery.cookie.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/home/nav.js?body=1" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Served asset /home/nav.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-1.7.1.min.js?body=1" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Served asset /jquery-1.7.1.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/home/iDeal.visitRecord.js?body=1" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Served asset /home/iDeal.visitRecord.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/logo.png" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Served asset /newnavi/logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/dot.png" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Served asset /newnavi/dot.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/newnavi/title.png" for 127.0.0.1 at 2013-12-26 10:00:02 +0800
+Served asset /newnavi/title.png - 304 Not Modified (0ms)
+
+
+Started GET "/areas/1" for 127.0.0.1 at 2013-12-26 10:00:09 +0800
+Processing by AreasController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mArea Load (0.4ms)[0m  SELECT `areas`.* FROM `areas` WHERE `areas`.`id` = 1 LIMIT 1
+  [1m[36mShop Load (0.5ms)[0m  [1mSELECT `shops`.* FROM `shops` INNER JOIN `areas_shops` ON `shops`.`id` = `areas_shops`.`shop_id` WHERE `areas_shops`.`area_id` = 1[0m
+  [1m[35mShopHour Load (0.3ms)[0m  SELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 1
+  [1m[36mShopHour Load (0.4ms)[0m  [1mSELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 2[0m
+  [1m[35mShopHour Load (0.3ms)[0m  SELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 3
+  Rendered areas/show.html.erb within layouts/areas (46.7ms)
+Completed 200 OK in 112ms (Views: 108.9ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/assets/jquery-1.7.1.min.js?body=1" for 127.0.0.1 at 2013-12-26 10:00:09 +0800
+Served asset /jquery-1.7.1.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.cookie.js?body=1" for 127.0.0.1 at 2013-12-26 10:00:09 +0800
+Served asset /jquery.cookie.js - 304 Not Modified (0ms)
+
+
+Started GET "/shops/get_detail?shopID=2&_=1388023210332" for 127.0.0.1 at 2013-12-26 10:00:10 +0800
+Processing by ShopsController#get_detail as JSON
+  Parameters: {"shopID"=>"2", "_"=>"1388023210332"}
+  [1m[36mShop Load (0.3ms)[0m  [1mSELECT `shops`.* FROM `shops` WHERE `shops`.`id` = 2 LIMIT 1[0m
+  [1m[35mShopHour Load (0.2ms)[0m  SELECT `shop_hours`.* FROM `shop_hours` WHERE `shop_hours`.`shop_id` = 2
+  [1m[36mPrimaryBusiness Load (0.2ms)[0m  [1mSELECT `primary_businesses`.* FROM `primary_businesses` INNER JOIN `primary_businesses_shops` ON `primary_businesses`.`id` = `primary_businesses_shops`.`primary_business_id` WHERE `primary_businesses_shops`.`shop_id` = 2[0m
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:00:48 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:00:57 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:01:06 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:01:15 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:01:24 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:01:33 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:01:42 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:01:51 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:02:00 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:02:09 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:02:18 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:02:27 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/ads/ad1.png" for 127.0.0.1 at 2013-12-26 10:02:36 +0800
+Served asset /ads/ad1.png - 304 Not Modified (0ms)
