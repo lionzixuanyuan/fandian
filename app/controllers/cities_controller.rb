@@ -3,6 +3,7 @@ class CitiesController < ApplicationController
   # GET /cities.json
   def index
     @cities = City.all
+    puts "aaa"
 
     respond_to do |format|
       format.html # index.html.erb
